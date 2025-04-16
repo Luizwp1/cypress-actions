@@ -7,7 +7,11 @@ on:
         description: Run by cypress command line
         default: cypress/e2e/*
 
-        
+env:
+  CYPRESS_RECORD_KEY: 0b021755-f394-412c-9988-b6f30aa95654
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_BUILD_ID: ${{ github.run_id }}
+
 jobs:
   cypress-e2e-electron:
     runs-on: ubuntu-latest
@@ -25,10 +29,9 @@ jobs:
           browser: electron
           record: true
           group: UI Electron
+          ci-build-id: ${{ env.CI_BUILD_ID }}
           spec: ${{ github.event.inputs.spec }}
-        env:
-          CYPRESS_RECORD_KEY: 0b021755-f394-412c-9988-b6f30aa95654
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   cypress-e2e-chrome:
     needs: cypress-e2e-electron
     runs-on: ubuntu-latest
@@ -46,10 +49,9 @@ jobs:
           browser: chrome
           record: true
           group: UI Chrome
+          ci-build-id: ${{ env.CI_BUILD_ID }}
           spec: ${{ github.event.inputs.spec }}
-        env:
-          CYPRESS_RECORD_KEY: 0b021755-f394-412c-9988-b6f30aa95654
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   cypress-e2e-firefox:
     needs: cypress-e2e-electron
     runs-on: ubuntu-latest
@@ -67,8 +69,7 @@ jobs:
           browser: firefox
           record: true
           group: UI Firefox
+          ci-build-id: ${{ env.CI_BUILD_ID }}
           spec: ${{ github.event.inputs.spec }}
-        env:
-          CYPRESS_RECORD_KEY: 0b021755-f394-412c-9988-b6f30aa95654
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
           
