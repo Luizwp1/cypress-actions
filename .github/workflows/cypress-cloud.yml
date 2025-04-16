@@ -45,6 +45,7 @@ jobs:
           install-command: yarn install
           browser: chrome
           record: true
+          parallel: true
           group: UI Chrome
           spec: ${{ github.event.inputs.spec }}
         env:
@@ -66,6 +67,7 @@ jobs:
           install-command: yarn install
           browser: firefox
           record: true
+          parallel: true
           group: UI Firefox
           spec: ${{ github.event.inputs.spec }}
         env:
